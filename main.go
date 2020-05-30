@@ -19,5 +19,24 @@ func main() {
 
 	if host_exists && port_exists {
 		log.Printf("Host: %s Port: %s", host, port)
+
+		transport := new(SmppTransport)
+
+		err := transport.Open(host, port)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		protocol := new(SmppClient)
+		protocol.transport = transport
+
+		err = protocol.bindTransmitter("login", "pass")
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		transport.Close()
 	}
 }
