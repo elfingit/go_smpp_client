@@ -18,6 +18,11 @@ type Header struct {
 	Seq    uint32
 }
 
+func (h *Header) SetLen(length int) {
+	length += HeaderLen
+	h.Len = uint32(length)
+}
+
 func (h *Header) SerializeTo(w io.Writer) error {
 	b := make([]byte, HeaderLen)
 	binary.BigEndian.PutUint32(b[0:4], h.Len)

@@ -31,7 +31,7 @@ func main() {
 		protocol := new(SmppClient)
 		protocol.transport = transport
 
-		err = protocol.bindTransmitter("login", "pass")
+		err = protocol.bindTransmitter("login", "pass", "test")
 
 		if err != nil {
 			log.Fatal(err)
